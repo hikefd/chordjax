@@ -2,8 +2,182 @@
 <html>
     <head>
         <title></title>
+        <script src="https://unpkg.com/vue@next"></script>
+        <style>
+            
+		.chordJax cjx-lane {
+            display: flex;
+            position: relative;
+            border: 1px solid black;
+            border-top: none;
+            border-bottom: none;
+		}
+        cjx-lane bar {
+            width: 100%;
+            border: 1px solid black;
+            border-top: none;
+            border-bottom: none;
+        }
+        cjx-lane seg {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        cjx-lane chord {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0.2em;
+        }
+        cjx-lane chord crt {
+            vertical-align: baseline;
+            position: relative;
+        }
+
+		cjx-lane chord cop {
+            position: relative;
+            font-size: 80%;
+            vertical-align: super;
+		}
+        
+		cjx-lane chord ctr {
+			display: inline-block;
+			font-size: 70%;
+			bottom: 0em;
+			white-space: nowrap;
+		}
+		cjx-lane chord ctn {
+			display: inline-block;
+			font-size: 80%;
+		}
+        </style>
     </head>
     <body>
-    
+        <main id="app">
+            <textarea rows="20" cols="70" v-model="text"></textarea>
+            <select v-model="fontFamily">
+                <option v-for="f in fontFamilySelect">{{f}}</option>
+            </select>
+            
+            <div class="chordJax" :style="{fontFamily: fontFamily}" v-html="renderedHTML"></div>
+
+        </main>
+        <script type="module">
+        import ChordJax from '../chordjax.js';
+        const app = Vue.createApp({
+            data() {
+                return {
+                    fontFamilySelect: [
+                        'Gorgia',
+                        'sans-serif',
+                        'serif',
+                        'cursive',
+                        'system-ui',
+                        'Verdana',
+                        'Arial',
+                        'Helvetica',
+                        "Impact",
+                        "BatangChe",
+                        "OCR-B",
+                        "Times New Roman",
+                        "游ゴシック",
+                        "BIZ UDゴシック",
+                        "BIZ UDPゴシック",
+                        "Arial",
+                        "Bahnschrift",
+                        "Calibri",
+                        "Cambria",
+                        "Cambria Math Regular",
+                        "Candara",
+                        "Comic Sans MS",
+                        "Consolas",
+                        "Constantia",
+                        "Corbel",
+                        "Courier New",
+                        "Courier Regular",
+                        "Ebrima",
+                        "FixedSys Regular",
+                        "Franklin Gothic",
+                        "Gabriola Regular",
+                        "Gadugi",
+                        "Georgia",
+                        "HoloLens MDL2 Assets Regular",
+                        "Impact Regular",
+                        "Javanese Text Regular",
+                        "Leelawadee UI",
+                        "Lucida Console Regular",
+                        "Lucida Sans Unicode Regular",
+                        "Malgun Gothic",
+                        "Marlett Regular",
+                        "Microsoft Himalaya Regular",
+                        "Microsoft JhengHei",
+                        "Microsoft JhengHei UI",
+                        "Microsoft New Tai Lue",
+                        "Microsoft PhagsPa",
+                        "Microsoft Sans Serif Regular",
+                        "Microsoft Tai Le",
+                        "Microsoft YaHei",
+                        "Microsoft YaHei UI",
+                        "Microsoft Yi Baiti Regular",
+                        "MingLiU_HKSCS-ExtB Regular",
+                        "MingLiU-ExtB Regular",
+                        "Modern Regular",
+                        "Mongolian Baiti Regular",
+                        "MS Gothic Regular",
+                        "MS PGothic Regular",
+                        "MS Sans Serif Regular",
+                        "MS Serif Regular",
+                        "MS UI Gothic Regular",
+                        "MV Boli Regular",
+                        "Myanmar Text Regular",
+                        "Nirmala UI",
+                        "NSimSun Regular",
+                        "Palatino Linotype",
+                        "PMingLiU-ExtB Regular",
+                        "Roman Regular",
+                        "Script Regular",
+                        "Segoe MDL2 Assets Regular",
+                        "Segoe Print",
+                        "Segoe Script",
+                        "Segoe UI",
+                        "Segoe UI Emoji Regular",
+                        "Segoe UI Historic Regular",
+                        "Segoe UI Symbol Regular",
+                        "SimSun Regular",
+                        "SimSun-ExtB Regular",
+                        "Sitka Banner",
+                        "Sitka Display",
+                        "Sitka Heading",
+                        "Sitka Small",
+                        "Sitka Subheading",
+                        "Sitka Text",
+                        "Small Fonts Regular",
+                        "Sylfaen Regular",
+                        "Symbol Regular",
+                        "System Bold",
+                        "Tahoma",
+                        "Terminal",
+                        "Times New Roman",
+                        "Trebuchet MS",
+                        "Verdana",
+                        "Wingdings Regular",
+                        "Yu Gothic",
+                        "Yu Gothic UI",
+
+                    ],
+                    fontFamily: 'Arial',
+                    text: '| F#m Dm Eb7 - | - A/B Dm-5 Eb7(add9) |\n'
+                    + '| F#m Dm - Eb7 | C#M7-5(on Bb) - [A Bm7] [G#add9 Dbaug] |',
+                };
+            },
+            computed: {
+                renderedHTML() {
+                    return ChordJax.render(this.text);
+                },
+            }
+        }).mount('#app');
+
+        </script>
     </body>
 </html>
